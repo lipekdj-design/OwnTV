@@ -8,7 +8,9 @@ import android.os.SystemClock
 import android.util.Log
 import androidx.room.useWriterConnection
 import android.view.WindowManager
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -99,6 +101,14 @@ open class MainActivity : ComponentActivity() {
     private var pendingDeepLink by mutableStateOf<LauncherDeepLink?>(null)
     private var pendingSection by mutableStateOf<MainSection?>(null)
 
+    /** owntv://camera…: add the camera if asked, then play it through the usual deep-link path. */
+    private fun handleCameraLink(uri: android.net.Uri?) {
+        if (!tv.own.owntv.hub.CameraLinks.isCameraLink(uri) || uri == null) return
+        lifecycleScope.launch {
+            tv.own.owntv.hub.CameraLinks.handle(applicationContext, uri)?.let { pendingDeepLink = it }
+        }
+    }
+
     /** Section links for home-screen shortcuts; the core parser only knows owntv://open/live. */
     private fun parseSectionLink(uri: android.net.Uri?): MainSection? {
         if (uri == null || uri.scheme != "owntv" || uri.host != "open") return null
@@ -128,6 +138,7 @@ open class MainActivity : ComponentActivity() {
         setIntent(intent)
         pendingDeepLink = LauncherDeepLink.parse(intent.data)
         pendingSection = parseSectionLink(intent.data)
+        handleCameraLink(intent.data)
         Log.d(TAG, "onNewIntent deepLinkHost=${intent.data?.host} deepLinkType=${pendingDeepLink?.javaClass?.simpleName ?: "none"}")
     }
 
@@ -188,6 +199,7 @@ open class MainActivity : ComponentActivity() {
         splash.setKeepOnScreenCondition { !contentReady && SystemClock.uptimeMillis() < splashDeadline }
         pendingDeepLink = LauncherDeepLink.parse(intent.data)
         pendingSection = parseSectionLink(intent.data)
+        handleCameraLink(intent.data)
         Log.d(TAG, "onCreate deepLinkHost=${intent.data?.host} deepLinkType=${pendingDeepLink?.javaClass?.simpleName ?: "none"}")
         val dbError = probeDatabase()
         if (dbError != null) {

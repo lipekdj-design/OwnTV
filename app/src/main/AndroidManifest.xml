@@ -113,6 +113,9 @@
                 <data
                     android:host="open"
                     android:scheme="owntv" />
+                <data
+                    android:host="camera"
+                    android:scheme="owntv" />
             </intent-filter>
         </activity>
 
@@ -141,6 +144,9 @@
                     android:scheme="owntv" />
                 <data
                     android:host="open"
+                    android:scheme="owntv" />
+                <data
+                    android:host="camera"
                     android:scheme="owntv" />
             </intent-filter>
         </activity>
@@ -171,6 +177,9 @@
                 <data
                     android:host="open"
                     android:scheme="owntv" />
+                <data
+                    android:host="camera"
+                    android:scheme="owntv" />
             </intent-filter>
         </activity>
 
@@ -199,6 +208,9 @@
                     android:scheme="owntv" />
                 <data
                     android:host="open"
+                    android:scheme="owntv" />
+                <data
+                    android:host="camera"
                     android:scheme="owntv" />
             </intent-filter>
         </activity>
@@ -229,6 +241,9 @@
                 <data
                     android:host="open"
                     android:scheme="owntv" />
+                <data
+                    android:host="camera"
+                    android:scheme="owntv" />
             </intent-filter>
         </activity>
 
@@ -257,6 +272,9 @@
                     android:scheme="owntv" />
                 <data
                     android:host="open"
+                    android:scheme="owntv" />
+                <data
+                    android:host="camera"
                     android:scheme="owntv" />
             </intent-filter>
         </activity>
@@ -287,6 +305,9 @@
                 <data
                     android:host="open"
                     android:scheme="owntv" />
+                <data
+                    android:host="camera"
+                    android:scheme="owntv" />
             </intent-filter>
         </activity>
 
@@ -315,6 +336,9 @@
                     android:scheme="owntv" />
                 <data
                     android:host="open"
+                    android:scheme="owntv" />
+                <data
+                    android:host="camera"
                     android:scheme="owntv" />
             </intent-filter>
         </activity>
@@ -345,6 +369,9 @@
                     android:scheme="owntv" />
                 <data
                     android:host="open"
+                    android:scheme="owntv" />
+                <data
+                    android:host="camera"
                     android:scheme="owntv" />
             </intent-filter>
         </activity>

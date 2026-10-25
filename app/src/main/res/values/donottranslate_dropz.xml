@@ -4,4 +4,7 @@
     <string name="app_name" translatable="false">DROPZ TV</string>
     <!-- The default font slot now renders DM Sans (see FontCustomization.kt). -->
     <string name="settings_font_plus_jakarta_sans" translatable="false">DM Sans</string>
+    <!-- Network cameras: the playlist DROPZ TV keeps them in, and the name a camera gets without one. -->
+    <string name="dropz_cameras_source" translatable="false">Câmeras</string>
+    <string name="dropz_camera_default_name" translatable="false">Câmera</string>
 </resources>
