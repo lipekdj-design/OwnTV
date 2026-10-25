@@ -193,6 +193,17 @@ jobs:
             echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.keystore"
             echo "KEYSTORE_FILE=$RUNNER_TEMP/release.keystore" >> "$GITHUB_ENV"
             echo "Release signing configured."
+          elif [ -f signing/dropz-tv.keystore ]; then
+            # DROPZ TV fork: a committed keystore, so every build is a release signed with the SAME key
+            # and installs over the previous one without wiping the TV's playlists.
+            echo "KEYSTORE_FILE=$GITHUB_WORKSPACE/signing/dropz-tv.keystore" >> "$GITHUB_ENV"
+            mkdir -p ~/.gradle
+            {
+              echo "owntv.keystorePassword=dropztv2026"
+              echo "owntv.keyAlias=dropztv"
+              echo "owntv.keyPassword=dropztv2026"
+            } >> ~/.gradle/gradle.properties
+            echo "DROPZ TV keystore configured."
           else
             echo "No KEYSTORE_BASE64 secret set — building a debug-signed APK."
           fi

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DROPZ TV: core strings that name the app, with "OwnTV" replaced by "DROPZ TV".
+     App resources override the library's, so these win at merge time. Links keep the original name. -->
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="common_own_tv_user">DROPZ TV 사용자</string>
+    <string name="content_storage_folder_fallback">다운로드 폴더를 지금 사용할 수 없어, 다시 연결될 때까지 DROPZ TV 자체 폴더에 저장합니다.</string>
+    <string name="content_epg_own_player">DROPZ TV 플레이어</string>
+    <string name="update_ready">DROPZ TV v<xliff:g id="available">%1$s</xliff:g>을 설치할 준비가 되었습니다(현재 v<xliff:g id="current">%2$s</xliff:g>).</string>
+    <string name="settings_proxy_description">모든 DROPZ TV 트래픽과 재생 데이터를 HTTP 프록시를 통해 전송합니다.</string>
+    <string name="settings_metadata_shared_worker_description">DROPZ TV Worker · 설정 불필요</string>
+    <string name="settings_restore_remote_description">같은 Wi-Fi에 있는 브라우저가 있는 아무 기기(휴대폰, 컴퓨터 또는 다른 TV)에서 QR을 스캔(또는 URL 열기)하고 이 PIN을 입력한 뒤 DROPZ TV 백업 파일을 골라 보내세요. 복원할 항목은 여기서 선택합니다.</string>
+    <string name="settings_catchup_player_internal">DROPZ TV 플레이어</string>
+    <string name="settings_dns_toggle_description">모든 DROPZ TV 도메인 조회에 사용자 지정 DNS 서버를 사용합니다.</string>
+    <string name="settings_language_contribution_description">QR 코드를 스캔하거나 링크를 열어 사용 가능한 언어를 선택하고 DROPZ TV 번역 구성 요소 6개 전체에 기여할 수 있습니다.</string>
+    <string name="settings_language_contribution_qr_description">DROPZ TV 번역 프로젝트 개요 QR 코드</string>
+    <string name="local_sync_error_unreachable">이 기기에 연결할 수 없습니다. 그 기기에서 DROPZ TV → 더보기 → 로컬 동기화를 열고 동기화 모드를 켜세요. 두 기기가 같은 Wi‑Fi에 있어야 합니다.</string>
+    <string name="settings_app_icon_summary">DROPZ TV 아이콘 및 로고 색상</string>
+    <string name="settings_help_fonts">DROPZ TV 전체에서 쓰는 글꼴과 글자 크기입니다. 팝업도 같은 글꼴을 씁니다.</string>
+    <string name="settings_help_app_icon">TV 홈 화면의 DROPZ TV 아이콘입니다. 런처에 반영되기까지 잠시 걸릴 수 있습니다.</string>
+    <string name="settings_help_brand_accent">메뉴, 정보, 설정의 DROPZ TV 로고가 재생 삼각형을 강조 색상으로 표시합니다. 홈 화면 아이콘은 원래 색상을 유지합니다.</string>
+    <string name="setup_set_up_owntv">DROPZ TV 설정</string>
+    <string name="setup_sync_device_description">Wi‑Fi로 다른 DROPZ TV 기기에서 모든 항목을 복사합니다</string>
+    <string name="companion_pin_page_title">DROPZ TV — PIN 입력</string>
+    <string name="companion_add_page_title">DROPZ TV — 소스 추가</string>
+    <string name="companion_saved_page_title">DROPZ TV — 전송 완료</string>
+    <string name="companion_backup_page_title">DROPZ TV — 백업 복원</string>
+    <string name="companion_backup_description">DROPZ TV 백업 파일(.own 또는 이전 형식의 .json)을 선택하고 보내기를 누르세요. 파일이 TV로 전송되면 리모컨을 들고 TV에서 복원할 항목을 선택하세요.</string>
+    <string name="companion_image_page_title">DROPZ TV — 배경 이미지</string>
+    <string name="companion_download_page_title">DROPZ TV — 백업 다운로드</string>
+    <string name="companion_download_description">TV에서 DROPZ TV 백업 파일을 준비했습니다. 버튼을 눌러 이 기기에 저장하세요(owntv-backup.own). 안전한 곳에 보관하세요. 나중에 이 파일로 복원할 수 있습니다.</string>
+    <string name="local_sync_browser_title">DROPZ TV 로컬 동기화</string>
+    <string name="local_sync_browser_body">이 주소는 다른 기기의 DROPZ TV 앱을 위한 것입니다. 그쪽에서 로컬 동기화를 열고 목록에서 이 기기를 선택하세요.</string>
+</resources>

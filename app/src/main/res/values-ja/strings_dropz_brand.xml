@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DROPZ TV: core strings that name the app, with "OwnTV" replaced by "DROPZ TV".
+     App resources override the library's, so these win at merge time. Links keep the original name. -->
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="common_own_tv_user">DROPZ TV ユーザー</string>
+    <string name="content_storage_folder_fallback">ダウンロードフォルダーは現在利用できません。戻るまで、ダウンロードは DROPZ TV 専用のフォルダーに保存されます。</string>
+    <string name="update_ready">DROPZ TV v<xliff:g id="available">%1$s</xliff:g>のインストール準備ができました（現在のバージョン：v<xliff:g id="current">%2$s</xliff:g>）。</string>
+    <string name="settings_recording_timers_inexact">この端末では DROPZ TV が正確なアラームを設定できないため、録画が数分遅れて始まることがあります。その分だけ早めに開始します。</string>
+    <string name="sports_alerts_when_closed">DROPZ TV を閉じているときも通知</string>
+    <string name="sports_alerts_footnote">DROPZ TV を閉じていても、通知は通常 1 分以内に届きます。画面を消したまま長時間置いていると、Android が最大 15 分ほど遅らせることがあります。ライブスコアカードは遅れません。</string>
+    <string name="sports_no_playlist_body">スコア、順位表、通知はプレイリストなしでも使えます。追加すると、DROPZ TV がこの試合を放送するチャンネルをすべて見つけます。</string>
+    <string name="sports_sport_buttons_description">自分の競技：選んだものだけ。すべての競技：DROPZ TV が知るすべてのリーグ（読み込みに時間がかかります）。</string>
+    <string name="player_trailer_blocked_title">この予告編は DROPZ TV では再生できません</string>
+    <string name="settings_metadata_shared_worker_description">DROPZ TV Worker · 設定不要</string>
+    <string name="settings_ffmpeg_audio_description">オン：ExoPlayer は、デバイスにデコーダーがない音声（DTS、TrueHD、MP2 など）もデコードできます。デバイス自身のデコーダーが引き続き優先されます。オフ：ExoPlayer はデバイスのデコーダーだけを使います。mpv は常に FFmpeg でデコードします。変更すると DROPZ TV が再起動します。</string>
+    <string name="settings_ffmpeg_audio_restart_message">音声デコーダーは DROPZ TV の再起動後に切り替わります。</string>
+    <string name="settings_restore_remote_description">同じ Wi-Fi にあるブラウザー付きの任意の機器（スマホ、パソコン、別のテレビ）で QR を読み取る（または URL を開く）、この PIN を入力して DROPZ TV のバックアップファイルを選んで送信します。復元する内容はここで選びます。</string>
+    <string name="settings_sources_probe_warning">同時に視聴できるチャンネル数を知らせないプロバイダーは少なくありません。そこで DROPZ TV はいくつか実際に開き、どれが続くかを見て判断します。再生中のものはすべて停止し、最大で 2 分ほどかかります。</string>
+    <string name="settings_sources_probe_unknown">このプロバイダーが許可するチャンネル数を DROPZ TV は特定できませんでした。</string>
+    <string name="settings_live_tune_timeout_description">この時間までにライブチャンネルの映像が出ない場合、DROPZ TV はすべてのプレーヤーを順に試して黒い画面を映し続ける代わりに、試行をやめてお知らせします。「しない」を選ぶと試行を続けるため、プロバイダーが削除したチャンネルでは 1 分をゆうに超えることがあります。プロバイダー側から求められた待ち時間は含みません。</string>
+    <string name="local_sync_error_unreachable">その端末に接続できませんでした。その端末で DROPZ TV → その他 → ローカル同期 を開き、同期モードをオンにしてください。両方が同じ Wi-Fi に接続している必要があります。</string>
+    <string name="settings_app_icon_sheet_mobile">ホーム画面での DROPZ TV の見え方。アプリが一度再起動します。</string>
+    <string name="settings_help_theme">DROPZ TV はダーク向けに設計されています。システムはテレビ本体の設定があればそれに従い、ライトは明るい部屋に向いています。</string>
+    <string name="settings_help_fonts">DROPZ TV 全体で使うフォントと文字の大きさです。ポップアップも同じフォントを使います。</string>
+    <string name="settings_help_app_icon">テレビのホーム画面にある DROPZ TV のアイコンです。ランチャーに反映されるまで少し時間がかかることがあります。</string>
+    <string name="settings_help_brand_accent">メニュー、「情報」、セットアップの DROPZ TV ロゴの再生三角形がアクセントカラーになります。ホーム画面のアイコンは元の色のままです。</string>
+    <string name="settings_help_startup">DROPZ TV の起動時に表示するもの：ホーム、最後に見たチャンネル、お気に入り、または選んだチャンネル。</string>
+    <string name="settings_help_check_updates">GitHub で新しい DROPZ TV を今すぐ探し、インストールを提案します。プレイリスト、お気に入り、設定はそのまま残ります。</string>
+    <string name="settings_help_update_startup">DROPZ TV の起動ごとに新しいバージョンを探し、あれば知らせます。確認なしにインストールされることはありません。</string>
+    <plurals name="settings_help_language">
+        <item quantity="other">DROPZ TV のすべてのメニューとメッセージの言語です。<xliff:g id="count">%1$d</xliff:g> 言語に対応。選ぶまではテレビ本体の言語に従います。</item>
+    </plurals>
+    <string name="settings_language_system_help">DROPZ TV はテレビの言語（現在は <xliff:g id="language">%1$s</xliff:g>）に従います。DROPZ TV だけで使う言語を下から選んでください。</string>
+    <string name="settings_language_pick_help">テレビの言語に関係なく、DROPZ TV で <xliff:g id="language">%1$s</xliff:g> を使います。</string>
+    <string name="settings_help_bg_background">Stage は DROPZ TV 独自のやわらかな色を表示します。画像はすべての画面の後ろに自分の画像を表示します。無地は平らな暗い塗りです。</string>
+    <string name="setup_sync_device_description">Wi-Fi 経由でもう一方の DROPZ TV 端末からすべてをコピーします</string>
+    <string name="companion_pin_page_title">DROPZ TV — PINを入力</string>
+    <string name="companion_add_page_title">DROPZ TV — ソースを追加</string>
+    <string name="companion_saved_page_title">DROPZ TV — 送信完了</string>
+    <string name="companion_backup_page_title">DROPZ TV — バックアップを復元</string>
+    <string name="companion_image_page_title">DROPZ TV — 背景画像</string>
+    <string name="companion_download_page_title">DROPZ TV — バックアップをダウンロード</string>
+    <string name="local_sync_browser_title">DROPZ TV ローカル同期</string>
+    <string name="local_sync_browser_body">このアドレスは、もう一方の端末の DROPZ TV アプリ用です。そちらでローカル同期を開き、一覧からこの端末を選んでください。</string>
+    <string name="setup_welcome_title">DROPZ TV へようこそ</string>
+    <string name="setup_line_app_icon">テレビのホーム画面での DROPZ TV の見え方</string>
+    <string name="setup_line_app_icon_mobile">ホーム画面での DROPZ TV の見え方</string>
+</resources>

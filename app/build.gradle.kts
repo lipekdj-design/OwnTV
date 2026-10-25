@@ -130,7 +130,8 @@ android {
     // builds still succeed, just unsigned.
     // Third source: the standalone out-of-repo properties file, loaded above defaultConfig.
     fun signingValue(env: String, property: String): String? =
-        System.getenv(env)
+        // A blank env var (an unset secret passed through a workflow) falls back to the property.
+        System.getenv(env)?.takeIf { it.isNotBlank() }
             ?: providers.gradleProperty(property).orNull
             ?: localSigningProps.getProperty(property)
 

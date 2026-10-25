@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DROPZ TV: core strings that name the app, with "OwnTV" replaced by "DROPZ TV".
+     App resources override the library's, so these win at merge time. Links keep the original name. -->
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="common_own_tv_user">DROPZ TV erabiltzailea</string>
+    <string name="content_exit_owntv">DROPZ TV itxi?</string>
+    <string name="content_epg_own_player">DROPZ TV erreproduzigailua</string>
+    <string name="update_ready">DROPZ TV v<xliff:g id="available">%1$s</xliff:g> prest dago (v<xliff:g id="current">%2$s</xliff:g> duzu).</string>
+    <string name="sports_alerts_when_closed">Alertak DROPZ TV itxita dagoenean</string>
+    <string name="sports_alerts_footnote">DROPZ TV itxita dagoenean, alertak minutu batean iristen dira normalean. Telefonoa denbora luzez geldi eta pantaila itzalita egon bada, Androidek 15 minutu inguru atzera ditzake. Zuzeneko emaitza-txartela ez da atzeratzen.</string>
+    <string name="settings_metadata_shared_worker_description">DROPZ TV Worker · konfiguraziorik gabe</string>
+    <string name="settings_metadata_clear_advanced_message">Zure TMDB API gakoa eta auto-ostatatutako zerbitzariaren helbidea gailu honetatik ezabatuko dira, eta DROPZ TV barneko zerbitzu partekatura itzuliko da bere eguneko kuotarekin.</string>
+    <string name="settings_metadata_fair_share">Barneko zerbitzua DROPZ TV erabiltzen duten guztien artean partekatzen da. Minutuko, orduko edo eguneko kuota agortzen bada, TMDB xehetasunak pausatu egiten dira leiho hori berrezarri arte; erreprodukzio-zerrendako informazioak funtzionatzen jarraitzen du. Zure gakoak edo Workerrak kuota hau kentzen du.</string>
+    <string name="settings_ffmpeg_audio_description">Aktibatuta: ExoPlayer-ek gailuak deskodetzailerik ez duen soinua ere deskodetu dezake, adibidez DTS, TrueHD edo MP2. Gailuaren deskodetzaileek lehentasuna dute oraindik. Desaktibatuta: ExoPlayer-ek gailuaren deskodetzaileak soilik erabiltzen ditu. mpv-k beti FFmpeg bidez deskodetzen du. Aldatzean DROPZ TV berrabiarazten da.</string>
+    <string name="settings_ffmpeg_audio_restart_message">Audio-deskodetzailea DROPZ TV berrabiarazi ondoren aldatzen da.</string>
+    <string name="settings_restore_remote_description">Wi-Fi sare berean dagoen telefono, tableta edo ordenagailu batean, eskaneatu QRa (edo ireki URLa), idatzi PIN hau, aukeratu zure DROPZ TV babeskopia-fitxategia eta sakatu Bidali telebistara. Ondoren, hemen aukeratuko duzu zer leheneratu.</string>
+    <string name="settings_catchup_player_internal">DROPZ TV erreproduzigailua</string>
+    <string name="settings_language_help_translate">Lagundu DROPZ TV zure hizkuntzara itzultzen</string>
+    <string name="settings_language_contribution_qr_description">DROPZ TV itzulpen-proiektuaren ikuspegi orokorraren QR kodea</string>
+    <string name="local_sync_error_unreachable">Gailu hori ezin izan da atzitu. Bertan, ireki DROPZ TV → Gehiago → Tokiko sinkronizazioa eta aktibatu Sinkronizazio modua. Bi gailuak Wi-Fi sare berean egon behar dute.</string>
+    <string name="settings_app_icon_sheet_mobile">Nola agertzen den DROPZ TV hasierako pantailan. Aplikazioa behin berrabiaraziko da.</string>
+    <string name="app_icon_restart_title">DROPZ TV berrabiarazi?</string>
+    <string name="app_icon_restart_message">Ikono eta logo berri bat aukeratu duzu. DROPZ TV berrabiarazi ondoren izango dute eragina.</string>
+    <string name="setup_disclaimer">DROPZ TV multimedia-erreproduzigailu hutsa da. Ez du kanalik, erreprodukzio-zerrendarik edo edukirik barne hartzen. Zure ardura da legez atzitu ditzakezun Xtream, M3U edo Stalker iturburuak gehitzea.</string>
+    <string name="setup_set_up_owntv">Konfiguratu DROPZ TV</string>
+    <string name="setup_sync_device_description">Kopiatu dena zure beste DROPZ TV gailutik Wi-Fi bidez</string>
+    <string name="setup_byo_source_description">DROPZ TV erreproduzigailua da — ekarri zure Xtream, M3U edo Stalker iturburua.</string>
+    <string name="companion_pin_page_title">DROPZ TV — Idatzi PINa</string>
+    <string name="companion_add_page_title">DROPZ TV — Gehitu iturburua</string>
+    <string name="companion_saved_page_title">DROPZ TV — Bidalita</string>
+    <string name="companion_backup_page_title">DROPZ TV — Leheneratu babeskopia</string>
+    <string name="companion_backup_description">Aukeratu DROPZ TV babeskopia-fitxategi bat (.own, edo .json zaharrago bat) eta sakatu Bidali. Telebistara transferitzen da — hartu urrutiko agintea eta aukeratu bertan zer leheneratu.</string>
+    <string name="companion_image_page_title">DROPZ TV — Atzealdeko irudia</string>
+    <string name="companion_download_page_title">DROPZ TV — Deskargatu babeskopia</string>
+    <string name="companion_download_description">Zure telebistak DROPZ TV babeskopia-fitxategi bat prestatu du. Sakatu botoia gailu honetan gordetzeko (owntv-backup.own). Gorde leku seguru batean — geroago leheneratu dezakezu.</string>
+    <string name="local_sync_browser_title">DROPZ TV tokiko sinkronizazioa</string>
+    <string name="local_sync_browser_body">Helbide hau zure beste gailuko DROPZ TV aplikaziorako da. Ireki Tokiko sinkronizazioa bertan eta aukeratu gailu hau zerrendatik.</string>
+    <string name="setup_line_app_icon_mobile">Nola agertzen den DROPZ TV hasierako pantailan</string>
+</resources>

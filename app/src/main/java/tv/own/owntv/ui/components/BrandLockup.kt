@@ -109,6 +109,7 @@ fun Wordmark(width: Dp, modifier: Modifier = Modifier, tv: Color = stageAccent.a
             text = BRAND_WORD,
             maxLines = 1,
             softWrap = false,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
             style = androidx.compose.ui.text.TextStyle(
                 color = own,
                 fontFamily = family,
@@ -121,6 +122,7 @@ fun Wordmark(width: Dp, modifier: Modifier = Modifier, tv: Color = stageAccent.a
             text = BRAND_DESCRIPTOR,
             maxLines = 1,
             softWrap = false,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
             style = androidx.compose.ui.text.TextStyle(
                 color = tv,
                 fontFamily = family,
