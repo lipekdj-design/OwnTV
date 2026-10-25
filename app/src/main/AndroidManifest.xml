@@ -35,6 +35,12 @@
         android:name="android.software.leanback"
         android:required="false" />
 
+    <!-- Lets a home-screen app read the continue-watching row and favourite channels (HomeHubProvider). -->
+    <permission
+        android:name="tv.own.owntv.permission.READ_HOME_HUB"
+        android:label="Read OwnTV continue watching and favourites"
+        android:protectionLevel="normal" />
+
     <application
         android:name=".OwnTVApp"
         android:allowBackup="false"
@@ -343,6 +349,14 @@
                     android:scheme="owntv" />
             </intent-filter>
         </activity>
+
+        <!-- Read-only summary for home-screen apps; see HomeHubProvider. -->
+        <provider
+            android:name="tv.own.owntv.hub.HomeHubProvider"
+            android:authorities="${applicationId}.homehub"
+            android:exported="true"
+            android:readPermission="tv.own.owntv.permission.READ_HOME_HUB"
+            android:writePermission="tv.own.owntv.permission.READ_HOME_HUB" />
 
     </application>
 
