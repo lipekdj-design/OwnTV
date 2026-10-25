@@ -51,7 +51,7 @@ internal class WizardAction(val label: String, val onClick: () -> Unit, val focu
 internal enum class WizardStep { LANGUAGE, DISPLAY, PROFILE, PLAYLIST, READY }
 
 /**
- * Every setup step's frame: the Stage background, the OwnTV lockup top left, the step
+ * Every setup step's frame: the Stage background, the DROPZ TV lockup top left, the step
  * dots top right, one glass panel (1040 wide, centred, from y 170) with a 42 px title, 19 px text and the
  * step's rows or cards, then [back] bottom-left and [next] bottom-right, and the key hints at the bottom.
  * Back on the remote calls [back] (or [onBack] where the step has no Back button).
@@ -72,17 +72,11 @@ internal fun WizardFrame(
     if (onBack != null) BackHandler { onBack() }
     val a = stageAccent
     BoxWithConstraints(Modifier.fillMaxSize().stageBackground(a.accent)) {
-        // The OwnTV lockup: the play mark on its cream tile, the name beside it.
-        Row(
-            Modifier.padding(start = 64.mpx, top = 56.mpx),
-            horizontalArrangement = Arrangement.spacedBy(14.mpx),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Box(Modifier.size(44.mpx).background(LockupTile, RoundedCornerShape(12.mpx)), contentAlignment = Alignment.Center) {
-                OwnTVIcon(OwnTVIcon.PLAY, LockupMark, Modifier.size(22.mpx))
-            }
-            Text(stringResource(R.string.app_name), style = stageText(24, 800), color = StageColors.Text, maxLines = 1, overflow = TextOverflow.Ellipsis)
-        }
+        // DROPZ TV lockup: the DROPZ drop with the "dropz" wordmark and its TV descriptor.
+        tv.own.owntv.ui.components.BrandLockup(
+            modifier = Modifier.padding(start = 64.mpx, top = 50.mpx),
+            markSize = 40,
+        )
         StepDots(step, Modifier.align(Alignment.TopEnd).padding(end = 64.mpx, top = 66.mpx))
 
         Column(
@@ -183,8 +177,6 @@ internal fun WizardCards(cards: List<WizardCard>, firstFocus: FocusRequester? = 
     }
 }
 
-private val LockupTile = Color(0xFFEFE6D2)
-private val LockupMark = Color(0xFF14535C)
 
 @Composable
 private fun Float.mpxLine() = with(androidx.compose.ui.platform.LocalDensity.current) { this@mpxLine.mpx.toSp() }
