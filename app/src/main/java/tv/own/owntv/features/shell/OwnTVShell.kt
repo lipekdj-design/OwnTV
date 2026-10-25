@@ -880,7 +880,22 @@ fun OwnTVShell(
             selectedSection == MainSection.SETTINGS -> { restoreFocus = true; onSelectSection(MainSection.MORE) }
             // Reached from a Search result: Back returns to Search once, its query, tab and row kept.
             searchReturn == selectedSection && focusedLayer != ShellLayer.SIDEBAR -> returnToSearch()
+            // DROPZ TV, floating rail: Back on the open rail closes it and returns to the page; Back on
+            // the page asks to exit (◀ at the edge is how the rail opens).
+            focusedLayer == ShellLayer.SIDEBAR && navStyle == tv.own.owntv.core.settings.SettingsRepository.NavStyle.FLOATING -> {
+                val entry = when (selectedSection) {
+                    MainSection.HOME -> homeEntry
+                    MainSection.EPG, MainSection.LIVE_TV -> guideEntry
+                    MainSection.MOVIES, MainSection.SERIES -> vodEntry
+                    MainSection.DOWNLOADS -> downloadsEntry
+                    MainSection.MORE -> moreEntry
+                    MainSection.SPORTS -> sportsEntry
+                    else -> null
+                }
+                if (entry?.invoke() != true) runCatching { contentAreaFocus.requestFocus() }
+            }
             focusedLayer == ShellLayer.SIDEBAR -> showExit = true
+            navStyle == tv.own.owntv.core.settings.SettingsRepository.NavStyle.FLOATING -> showExit = true
             else -> focusRail()
         }
     }
