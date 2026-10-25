@@ -29,12 +29,20 @@
 1	log	app/src/main/java/tv/own/owntv/MainActivity.kt	database probe failed: $error
 1	performance	app/src/main/java/tv/own/owntv/MainActivity.kt	db-probed
 1	performance	app/src/main/java/tv/own/owntv/MainActivity.kt	destination-ready
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	epg
 1	performance	app/src/main/java/tv/own/owntv/MainActivity.kt	first-composition
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	guide
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	home
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	movies
 2	technical	app/src/main/java/tv/own/owntv/MainActivity.kt	none
 1	log	app/src/main/java/tv/own/owntv/MainActivity.kt	onCreate deepLinkHost=${intent.data?.host} deepLinkType=${pendingDeepLink?.javaClass?.simpleName ?: "none"}
 1	log	app/src/main/java/tv/own/owntv/MainActivity.kt	onNewIntent deepLinkHost=${intent.data?.host} deepLinkType=${pendingDeepLink?.javaClass?.simpleName ?: "none"}
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	open
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	owntv
 1	performance	app/src/main/java/tv/own/owntv/MainActivity.kt	profile-id-loaded
 1	performance	app/src/main/java/tv/own/owntv/MainActivity.kt	profiles-loaded
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	search
+1	uri	app/src/main/java/tv/own/owntv/MainActivity.kt	series
 1	compiler	app/src/main/java/tv/own/owntv/OwnTVApp.kt	DEPRECATION
 1	technical	app/src/main/java/tv/own/owntv/OwnTVApp.kt	ahXN00/OwnTV
 1	file-path	app/src/main/java/tv/own/owntv/OwnTVApp.kt	image_cache
@@ -860,6 +868,16 @@
 2	technical	app/src/main/java/tv/own/owntv/features/update/UpdateDialog.kt	**
 2	technical	app/src/main/java/tv/own/owntv/features/update/UpdateDialog.kt	-
 2	technical	app/src/main/java/tv/own/owntv/features/update/UpdateDialog.kt	•
+1	log	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	HomeHub
+1	uri	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	continue
+1	uri	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	favorites
+1	protocol	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	image
+1	uri	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	limit
+1	protocol	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	link
+1	protocol	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	progress
+1	log	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	query ${uri.path} failed
+1	protocol	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	subtitle
+1	protocol	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	title
 2	empty	app/src/main/java/tv/own/owntv/player/AudioNowPlayingBar.kt	\0
 1	technical	app/src/main/java/tv/own/owntv/player/AudioNowPlayingBar.kt	eq
 1	technical	app/src/main/java/tv/own/owntv/player/AudioNowPlayingBar.kt	eqBar$i

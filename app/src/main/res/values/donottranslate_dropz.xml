@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DROPZ TV: this fork's name on the home screen and in the app list. -->
+    <string name="app_name" translatable="false">DROPZ TV</string>
+</resources>
