@@ -116,6 +116,9 @@ internal fun ProfileEditorDialog(
     customPath: String = "",
     onPickPicture: ((java.io.File) -> Unit)? = null,
     onClearPicture: (() -> Unit)? = null,
+    // Shown as a visible button: a long press on OK, the only other way to delete, does not reach the
+    // app on many TV remotes.
+    onDelete: (() -> Unit)? = null,
 ) {
     var name by remember { mutableStateOf(initial?.name ?: "") }
     var avatarId by remember { mutableIntStateOf(initial?.avatarId ?: -1) } // new profiles default to no avatar
@@ -133,6 +136,9 @@ internal fun ProfileEditorDialog(
         onDismiss,
         title = stringResource(if (initial == null) R.string.profiles_new else R.string.profiles_edit),
         buttons = {
+            if (onDelete != null) {
+                tv.own.owntv.ui.stage.StagePopupButton(stringResource(R.string.common_delete), onClick = onDelete, primary = false)
+            }
             tv.own.owntv.ui.stage.StagePopupButton(stringResource(R.string.common_cancel), onClick = onDismiss, primary = false)
             tv.own.owntv.ui.stage.StagePopupButton(
                 stringResource(if (initial == null) R.string.profiles_create else R.string.profiles_save),

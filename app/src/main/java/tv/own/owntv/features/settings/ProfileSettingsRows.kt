@@ -135,6 +135,7 @@ internal fun ProfileSettingsRows() {
             customPath = profiles.firstOrNull { it.id == p.id }?.avatarPath.orEmpty(),
             onPickPicture = { file -> vm.setPicture(p.id, file) },
             onClearPicture = { vm.clearPicture(p.id) },
+            onDelete = if (profiles.size > 1) ({ editing = null; confirmDelete = p }) else null,
         )
     }
     confirmDelete?.let { p ->
