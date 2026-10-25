@@ -9,12 +9,10 @@ import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,6 +21,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -244,28 +244,30 @@ internal fun SettingsPage(entry: FocusRequester, pinned: Int, onOpenGroup: (Int)
                 Text(stringResource(R.string.more_settings_search), style = stageText(19, 500), color = if (focused) StageColors.Text else StageColors.Dim, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
-        Column(Modifier.padding(top = 22.mpx), verticalArrangement = Arrangement.spacedBy(20.mpx)) {
-            SettingsCards.chunked(3).forEach { row ->
-                // 150 at the default font; a larger app font grows the row rather than cutting the
-                // summary, and the row's cards keep one height.
-                Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(20.mpx)) {
-                    row.forEach { card ->
-                        val index = SettingsCards.indexOf(card)
-                        StageTile(
-                            modifier = Modifier.weight(1f).heightIn(min = 150.mpx).fillMaxHeight().then(if (index == back) Modifier.focusRequester(entry) else Modifier),
-                            onClick = { lastOpenedCard = index; onOpenGroup(index) },
-                            padding = 0.mpx,
-                        ) { focused ->
-                            Column(Modifier.padding(horizontal = 26.mpx, vertical = 24.mpx)) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    OwnTVIcon(card.icon, if (focused) StageColors.Text else StageColors.Muted, Modifier.size(28.mpx))
-                                    Spacer(Modifier.weight(1f))
-                                    Text((if (index == 1) profiles else card.count ?: pinned).toString(), style = stageText(17, 700), color = StageColors.Dim)
-                                }
-                                Text(stringResource(card.nameRes), style = stageText(24, 800), color = StageColors.Text, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 14.mpx))
-                                Text(stringResource(card.summaryRes), style = stageText(16, 500), color = StageColors.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 4.mpx))
-                            }
+        // DROPZ TV: one category per row, Apple TV style, in a scrolling list. The old 3-column grid had
+        // no scroll, so on a 720p TV its last row sat below the screen and could not be reached.
+        Column(
+            Modifier.padding(top = 22.mpx).weight(1f).verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(10.mpx),
+        ) {
+            SettingsCards.forEachIndexed { index, card ->
+                StageTile(
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 84.mpx).then(if (index == back) Modifier.focusRequester(entry) else Modifier),
+                    onClick = { lastOpenedCard = index; onOpenGroup(index) },
+                    padding = 0.mpx,
+                ) { focused ->
+                    Row(
+                        Modifier.padding(horizontal = 26.mpx, vertical = 16.mpx),
+                        horizontalArrangement = Arrangement.spacedBy(22.mpx),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        OwnTVIcon(card.icon, if (focused) StageColors.Text else StageColors.Muted, Modifier.size(28.mpx))
+                        Column(Modifier.weight(1f)) {
+                            Text(stringResource(card.nameRes), style = stageText(22, 800), color = StageColors.Text, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                            Text(stringResource(card.summaryRes), style = stageText(16, 500), color = StageColors.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.mpx))
                         }
+                        Text((if (index == 1) profiles else card.count ?: pinned).toString(), style = stageText(17, 700), color = StageColors.Dim)
+                        OwnTVIcon(OwnTVIcon.CHEVRON, if (focused) StageColors.Text else StageColors.Dim, Modifier.size(20.mpx))
                     }
                 }
             }
