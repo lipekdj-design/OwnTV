@@ -679,6 +679,9 @@ fun OwnTVShell(
         navStyle == tv.own.owntv.core.settings.SettingsRepository.NavStyle.DOCKED -> tv.own.owntv.features.shell.components.RailState.PINNED
         railFocused -> tv.own.owntv.features.shell.components.RailState.OPEN
         railIdleHidden -> tv.own.owntv.features.shell.components.RailState.HIDDEN
+        // DROPZ TV: a floating rail goes from open straight to hidden, with no icon capsule left over
+        // the content; ◀ at the left edge brings it back open.
+        navStyle == tv.own.owntv.core.settings.SettingsRepository.NavStyle.FLOATING -> tv.own.owntv.features.shell.components.RailState.HIDDEN
         else -> tv.own.owntv.features.shell.components.RailState.CAPSULE
     }
     // The playlist chip reflects the active filter: "All playlists" when none is chosen (id <= 0), the
