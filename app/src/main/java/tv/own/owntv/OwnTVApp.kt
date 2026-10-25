@@ -38,6 +38,8 @@ class OwnTVApp : Application(), SingletonImageLoader.Factory, androidx.work.Conf
 
         /** Sports' Auto rebuild waits this long after launch, so it never competes with the first screen. */
         private const val SPORTS_START_DELAY_MS = 15_000L
+        private const val DROPZ_PREFS = "dropz_tv"
+        private const val DROPZ_NAV_DEFAULTS = "nav_defaults_v1"
     }
 
     /** Application-lifetime scope for small fire-and-forget IO that must not touch the launch path. */
@@ -132,7 +134,16 @@ class OwnTVApp : Application(), SingletonImageLoader.Factory, androidx.work.Conf
         // on at 50%, the Stage background; Movies & Series keep an update's layout.
         appScope.launch {
             runCatching {
-                GlobalContext.get().get<tv.own.owntv.core.settings.SettingsRepository>().applyStageDefaults()
+                val settings = GlobalContext.get().get<tv.own.owntv.core.settings.SettingsRepository>()
+                settings.applyStageDefaults()
+                // DROPZ TV, once per install: a floating sidebar with names that hides while you browse
+                // (◀ at the edge brings it back), for a cleaner screen. The user can change it in Layout.
+                val prefs = getSharedPreferences(DROPZ_PREFS, MODE_PRIVATE)
+                if (!prefs.getBoolean(DROPZ_NAV_DEFAULTS, false)) {
+                    settings.setNavStyle(tv.own.owntv.core.settings.SettingsRepository.NavStyle.FLOATING)
+                    settings.setNavSize(tv.own.owntv.core.settings.SettingsRepository.NavSize.NORMAL)
+                    prefs.edit().putBoolean(DROPZ_NAV_DEFAULTS, true).apply()
+                }
             }
         }
         // Sports: core decides from Auto rebuild whether the stored board is due ("on every app start",
