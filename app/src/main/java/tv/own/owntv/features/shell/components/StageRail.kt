@@ -146,6 +146,8 @@ fun StageRail(
     onFocused: () -> Unit,
     nowPlaying: NowPlayingRail?,
     onNowPlaying: () -> Unit,
+    /** DROPZ TV: the Cameras item, shown after the sections when at least one camera is saved. */
+    onCameras: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
     val open = (state == RailState.OPEN || state == RailState.PINNED) && size != NavSize.COMPACT
@@ -262,6 +264,17 @@ fun StageRail(
                         (section == MainSection.MORE && selected == MainSection.SETTINGS),
                     onClick = { onSelect(section) },
                     modifier = if (section == focusSection) Modifier.focusRequester(selectedItemFocusRequester) else Modifier,
+                )
+            }
+            if (onCameras != null) {
+                RailItem(
+                    icon = OwnTVIcon.VIDEO,
+                    label = stringResource(R.string.dropz_cameras_source),
+                    trailing = null,
+                    detail = null,
+                    open = open,
+                    active = false,
+                    onClick = onCameras,
                 )
             }
             // Full height: the profile sits at the bottom, after the last separator.

@@ -38,6 +38,17 @@ object CameraLinks : KoinComponent {
 
     fun isCameraLink(uri: Uri?): Boolean = uri != null && uri.scheme == SCHEME && uri.host == HOST
 
+    /** Whether any camera has been added (the sidebar shows its Cameras item only then). */
+    fun hasCameras(context: Context): Boolean = File(context.filesDir, FILE_NAME).let { it.exists() && it.length() > 0 }
+
+    /** Opens the first camera through the activity's own deep-link path. */
+    fun openFirst(context: Context) {
+        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, Uri.Builder().scheme(SCHEME).authority(HOST).build())
+            .setPackage(context.packageName)
+            .addFlags(android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        runCatching { context.startActivity(intent) }.onFailure { Log.w(TAG, "open camera failed", it) }
+    }
+
     /** Adds the camera when asked, then returns the deep link that plays it (null when there is none). */
     suspend fun handle(context: Context, uri: Uri): LauncherDeepLink.Live? = withContext(Dispatchers.IO) {
         runCatching {

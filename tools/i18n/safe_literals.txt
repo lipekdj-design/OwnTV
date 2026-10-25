@@ -881,6 +881,7 @@
 1	file-path	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	cameras.m3u
 1	protocol	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	group-title="
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	name
+1	log	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	open camera failed
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	owntv
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	setup
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	url

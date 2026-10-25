@@ -684,6 +684,10 @@ fun OwnTVShell(
         navStyle == tv.own.owntv.core.settings.SettingsRepository.NavStyle.FLOATING -> tv.own.owntv.features.shell.components.RailState.HIDDEN
         else -> tv.own.owntv.features.shell.components.RailState.CAPSULE
     }
+    // DROPZ TV: the sidebar's Cameras item, re-checked each time the rail changes state.
+    val cameraContext = androidx.compose.ui.platform.LocalContext.current
+    val hasCameras = remember(railState) { tv.own.owntv.hub.CameraLinks.hasCameras(cameraContext) }
+    val camerasAction: (() -> Unit)? = if (hasCameras) ({ tv.own.owntv.hub.CameraLinks.openFirst(cameraContext) }) else null
     // The playlist chip reflects the active filter: "All playlists" when none is chosen (id <= 0), the
     // chosen playlist's name otherwise. With a single playlist there's nothing to switch, so just its name.
     val playlistLabel = when {
@@ -1404,6 +1408,7 @@ fun OwnTVShell(
                 onFocused = { focusedLayer = ShellLayer.SIDEBAR },
                 nowPlaying = nowPlayingRail,
                 onNowPlaying = enterNowPlaying,
+                onCameras = camerasAction,
             )
           }
         }
