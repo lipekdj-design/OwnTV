@@ -38,6 +38,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tv.own.owntv.core.util.Perf
 import tv.own.owntv.core.launcher.LauncherDeepLink
+import tv.own.owntv.core.nav.MainSection
 import tv.own.owntv.features.profiles.ProfileGate
 import tv.own.owntv.features.profiles.ProfileGateSessionViewModel
 import tv.own.owntv.features.profiles.ProfilesViewModel
@@ -96,6 +97,20 @@ open class MainActivity : ComponentActivity() {
     // The sole locale authority (SharedPreferences-backed; see docs/internationalization.md 0b).
     private val localeStore: tv.own.owntv.core.i18n.LocaleStore by inject()
     private var pendingDeepLink by mutableStateOf<LauncherDeepLink?>(null)
+    private var pendingSection by mutableStateOf<MainSection?>(null)
+
+    /** Section links for home-screen shortcuts; the core parser only knows owntv://open/live. */
+    private fun parseSectionLink(uri: android.net.Uri?): MainSection? {
+        if (uri == null || uri.scheme != "owntv" || uri.host != "open") return null
+        return when (uri.pathSegments.firstOrNull()) {
+            "movies" -> MainSection.MOVIES
+            "series" -> MainSection.SERIES
+            "search" -> MainSection.SEARCH
+            "guide", "epg" -> MainSection.EPG
+            "home" -> MainSection.HOME
+            else -> null
+        }
+    }
 
     /**
      * Wrap the Activity base with the selected locale so its own `Resources` resolve correctly —
@@ -112,6 +127,7 @@ open class MainActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         pendingDeepLink = LauncherDeepLink.parse(intent.data)
+        pendingSection = parseSectionLink(intent.data)
         Log.d(TAG, "onNewIntent deepLinkHost=${intent.data?.host} deepLinkType=${pendingDeepLink?.javaClass?.simpleName ?: "none"}")
     }
 
@@ -171,6 +187,7 @@ open class MainActivity : ComponentActivity() {
         val splashDeadline = SystemClock.uptimeMillis() + SPLASH_TIMEOUT_MS
         splash.setKeepOnScreenCondition { !contentReady && SystemClock.uptimeMillis() < splashDeadline }
         pendingDeepLink = LauncherDeepLink.parse(intent.data)
+        pendingSection = parseSectionLink(intent.data)
         Log.d(TAG, "onCreate deepLinkHost=${intent.data?.host} deepLinkType=${pendingDeepLink?.javaClass?.simpleName ?: "none"}")
         val dbError = probeDatabase()
         if (dbError != null) {
@@ -409,7 +426,15 @@ open class MainActivity : ComponentActivity() {
                                 onAddProfile = { gateSession.startAddingProfile() },
                                 modifier = Modifier.fillMaxSize(),
                             )
-                            shellReady -> OwnTVShell(
+                            shellReady -> {
+                            // owntv://open/movies, /series, /search, /guide, /home: open that section.
+                            LaunchedEffect(pendingSection, activeProfileId) {
+                                val section = pendingSection ?: return@LaunchedEffect
+                                if ((activeProfileId ?: -1L) < 0L) return@LaunchedEffect
+                                viewModel.selectSection(section)
+                                pendingSection = null
+                            }
+                            OwnTVShell(
                                 selectedSection = selectedSection,
                                 visibleSections = visibleSections,
                                 onSelectSection = viewModel::selectSection,
@@ -445,6 +470,7 @@ open class MainActivity : ComponentActivity() {
                                 },
                                 modifier = Modifier.fillMaxSize(),
                             )
+                            }
                             // No unexpected combination of asynchronous state may fall through to
                             // the shell. The known loading/onboarding/gate cases are above; a blank
                             // frame is safer than rendering protected content if a new state is added.
