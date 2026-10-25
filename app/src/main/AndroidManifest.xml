@@ -35,6 +35,13 @@
         android:name="android.software.leanback"
         android:required="false" />
 
+    <!-- DROPZ TV voice search: see whether the TV has a speech recognizer (package visibility). -->
+    <queries>
+        <intent>
+            <action android:name="android.speech.action.RECOGNIZE_SPEECH" />
+        </intent>
+    </queries>
+
     <!-- Lets a home-screen app read the continue-watching row and favourite channels (HomeHubProvider). -->
     <permission
         android:name="tv.own.owntv.permission.READ_HOME_HUB"

@@ -100,6 +100,8 @@ open class MainActivity : ComponentActivity() {
     private val localeStore: tv.own.owntv.core.i18n.LocaleStore by inject()
     private var pendingDeepLink by mutableStateOf<LauncherDeepLink?>(null)
     private var pendingSection by mutableStateOf<MainSection?>(null)
+    /** owntv://open/search?q=…: the text to search for once Search is open. */
+    private var pendingSearchQuery by mutableStateOf<String?>(null)
 
     /** owntv://camera…: add the camera if asked, then play it through the usual deep-link path. */
     private fun handleCameraLink(uri: android.net.Uri?) {
@@ -112,6 +114,9 @@ open class MainActivity : ComponentActivity() {
     /** Section links for home-screen shortcuts; the core parser only knows owntv://open/live. */
     private fun parseSectionLink(uri: android.net.Uri?): MainSection? {
         if (uri == null || uri.scheme != "owntv" || uri.host != "open") return null
+        if (uri.pathSegments.firstOrNull() == "search") {
+            pendingSearchQuery = uri.getQueryParameter("q")?.trim()?.takeIf { it.isNotEmpty() }
+        }
         return when (uri.pathSegments.firstOrNull()) {
             "movies" -> MainSection.MOVIES
             "series" -> MainSection.SERIES
@@ -439,11 +444,14 @@ open class MainActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxSize(),
                             )
                             shellReady -> {
-                            // owntv://open/movies, /series, /search, /guide, /home: open that section.
+                            // owntv://open/movies, /series, /search[?q=…], /guide, /home: open that section.
+                            val linkSearchVm = org.koin.androidx.compose.koinViewModel<tv.own.owntv.features.search.SearchViewModel>()
                             LaunchedEffect(pendingSection, activeProfileId) {
                                 val section = pendingSection ?: return@LaunchedEffect
                                 if ((activeProfileId ?: -1L) < 0L) return@LaunchedEffect
                                 viewModel.selectSection(section)
+                                pendingSearchQuery?.let { linkSearchVm.setQuery(it) }
+                                pendingSearchQuery = null
                                 pendingSection = null
                             }
                             OwnTVShell(

@@ -295,13 +295,36 @@ fun SearchScreen(
         } else {
             Text(stringResource(R.string.search_title), style = stageText(46, 800, (-1).mpxSp), color = StageColors.Text, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = titleModifier)
         }
+        // DROPZ TV: speak the title instead of typing it, through the TV's own voice input.
+        val voiceContext = androidx.compose.ui.platform.LocalContext.current
+        val voiceIntent = remember {
+            android.content.Intent(android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+                .putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL, android.speech.RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        }
+        val voiceAvailable = remember { voiceIntent.resolveActivity(voiceContext.packageManager) != null }
+        val voiceLauncher = androidx.activity.compose.rememberLauncherForActivityResult(
+            androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult(),
+        ) { result ->
+            result.data?.getStringArrayListExtra(android.speech.RecognizerIntent.EXTRA_RESULTS)
+                ?.firstOrNull()?.takeIf { it.isNotBlank() }?.let { vm.setQuery(it) }
+        }
+        if (voiceAvailable) {
+            StageSurface(
+                onClick = { runCatching { voiceLauncher.launch(voiceIntent) } },
+                radius = 15.mpx,
+                modifier = Modifier.padding(start = listX + listW - 48.mpx, top = 118.mpx).size(48.mpx),
+                idle = Modifier.background(StageColors.ControlFill, RoundedCornerShape(15.mpx)),
+            ) { focused ->
+                MicGlyph(if (focused) stageAccent.onAccent else StageColors.Text, Modifier.fillMaxSize().padding(12.mpx))
+            }
+        }
         StageSearchField(
             query = query,
             onQueryChange = vm::setQuery,
             placeholder = stringResource(R.string.search_field_hint),
             modifier = Modifier
                 .padding(start = listX, top = 118.mpx)
-                .width(listW)
+                .width(if (voiceAvailable) listW - 60.mpx else listW)
                 .focusRequester(fieldFocus)
                 // ▼ lands on a filter button that is on, not whichever one is nearest below.
                 .focusProperties { down = if (searching) filterEntry else if (!showingResults) jumpFocus else FocusRequester.Default },
@@ -766,5 +789,33 @@ private fun NothingFound(title: String, modifier: Modifier = Modifier) {
             stringResource(R.string.search_nothing_found_body), style = stageText(19, 400).copy(lineHeight = (19 * 1.55f).mpxSp),
             color = StageColors.Muted, modifier = Modifier.padding(top = 10.mpx),
         )
+    }
+}
+
+
+/** A microphone: capsule, cradle and stand, drawn to the size it is given. */
+@Composable
+private fun MicGlyph(color: Color, modifier: Modifier = Modifier) {
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width
+        val h = size.height
+        val stroke = w * 0.11f
+        val capW = w * 0.40f
+        drawRoundRect(
+            color = color,
+            topLeft = androidx.compose.ui.geometry.Offset((w - capW) / 2f, 0f),
+            size = androidx.compose.ui.geometry.Size(capW, h * 0.62f),
+            cornerRadius = androidx.compose.ui.geometry.CornerRadius(capW / 2f, capW / 2f),
+        )
+        drawArc(
+            color = color,
+            startAngle = 0f,
+            sweepAngle = 180f,
+            useCenter = false,
+            topLeft = androidx.compose.ui.geometry.Offset(w * 0.16f, h * 0.22f),
+            size = androidx.compose.ui.geometry.Size(w * 0.68f, h * 0.56f),
+            style = androidx.compose.ui.graphics.drawscope.Stroke(width = stroke),
+        )
+        drawLine(color, androidx.compose.ui.geometry.Offset(w / 2f, h * 0.78f), androidx.compose.ui.geometry.Offset(w / 2f, h), strokeWidth = stroke)
     }
 }
