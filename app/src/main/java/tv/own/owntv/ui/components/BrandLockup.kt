@@ -1,7 +1,6 @@
 package tv.own.owntv.ui.components
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,18 +16,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.koinInject
-import tv.own.owntv.R
 import tv.own.owntv.core.brand.AppIcon
 import tv.own.owntv.core.brand.AppIconSwitcher
 import tv.own.owntv.core.brand.PixelMark as CorePixelMark
 import tv.own.owntv.core.settings.SettingsRepository
+import tv.own.owntv.ui.theme.LocalMainFontFamily
 import tv.own.owntv.ui.theme.stageAccent
 
 /**
@@ -57,24 +55,19 @@ private fun accentTriangle(): Color? {
  */
 @Composable
 fun BrandMark(icon: AppIcon, size: Dp, modifier: Modifier = Modifier, followAccent: Boolean = true) {
-    val small = size <= 32.dp
-    val accent = accentTriangle().takeIf { followAccent }
-    if (icon == AppIcon.PIXEL && !small) {
-        PixelMark(modifier.size(size), triangle = accent ?: Color(icon.accent))
-        return
-    }
-    Box(modifier.size(size)) {
-        Image(painterResource(if (small) icon.markSmall else icon.mark), contentDescription = null, modifier = Modifier.fillMaxSize())
-        if (accent != null && icon.isCard(small)) {
-            Image(
-                painterResource(if (small) R.drawable.owntv_mark_play_small else R.drawable.owntv_mark_play),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                colorFilter = ColorFilter.tint(accent),
-            )
-        }
+    // DROPZ TV: the DROPZ drop — a square with three round corners and the top-right corner square —
+    // in the accent (light purple on dark), whatever icon colour is applied.
+    val color = accentTriangle().takeIf { followAccent } ?: DropzLilac
+    Canvas(modifier.size(size)) {
+        val s = this.size.minDimension
+        val r = s / 2f
+        drawCircle(color, radius = r, center = Offset(r, r))
+        drawRect(color, topLeft = Offset(r, 0f), size = androidx.compose.ui.geometry.Size(r, r))
     }
 }
+
+/** DROPZ light purple, the drop's colour on dark surfaces. */
+val DropzLilac = Color(0xFFB88AF0)
 
 /**
  * "Pixel": the dot-matrix TV set (core's [CorePixelMark], the same grid as `owntv_mark_pixel`), the dots
@@ -101,16 +94,46 @@ private val PixelSide = Color(CorePixelMark.SIDE)
 private val PixelPower = Color(CorePixelMark.POWER)
 
 /**
- * The wordmark: lowercase "own" in cream, "tv" in [tv] (the accent), drawn from
- * core's two vectors at [width]; its height follows the 988 × 182 drawing.
+ * DROPZ TV wordmark: "dropz" in DM Sans bold (the default font), letter-spacing -0.055 em, with the
+ * descriptor "TV" under it, spaced 0.42 em, as in the DROPZ identity guide. [tv] tints the
+ * descriptor, [own] the word. Sized from [width].
  */
 @Composable
 fun Wordmark(width: Dp, modifier: Modifier = Modifier, tv: Color = stageAccent.accent, own: Color = WordmarkCream) {
-    Box(modifier.width(width).height(width * 182f / 988f)) {
-        Image(painterResource(R.drawable.owntv_wordmark_own), null, Modifier.fillMaxSize(), colorFilter = ColorFilter.tint(own))
-        Image(painterResource(R.drawable.owntv_wordmark_tv), null, Modifier.fillMaxSize(), colorFilter = ColorFilter.tint(tv))
+    val density = androidx.compose.ui.platform.LocalDensity.current
+    val family = LocalMainFontFamily.current
+    val wordSize = with(density) { (width / 2.8f).toSp() }
+    val descSize = with(density) { (width / 2.8f * 0.27f).toSp() }
+    Column(modifier.width(width)) {
+        androidx.compose.foundation.text.BasicText(
+            text = BRAND_WORD,
+            maxLines = 1,
+            softWrap = false,
+            style = androidx.compose.ui.text.TextStyle(
+                color = own,
+                fontFamily = family,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                fontSize = wordSize,
+                letterSpacing = (-0.055).em,
+            ),
+        )
+        androidx.compose.foundation.text.BasicText(
+            text = BRAND_DESCRIPTOR,
+            maxLines = 1,
+            softWrap = false,
+            style = androidx.compose.ui.text.TextStyle(
+                color = tv,
+                fontFamily = family,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium,
+                fontSize = descSize,
+                letterSpacing = 0.42.em,
+            ),
+        )
     }
 }
+
+private const val BRAND_WORD = "dropz"
+private const val BRAND_DESCRIPTOR = "TV"
 
 val WordmarkCream = Color(0xFFFFF6EE)
 

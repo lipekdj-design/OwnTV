@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DROPZ TV launch icon: the DROPZ drop (square, three round corners, top-right square) in
+     light purple, centred in the 288 dp splash canvas so it sits inside the visible circle. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="288dp"
+    android:height="288dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+    <path
+        android:fillColor="#B88AF0"
+        android:pathData="M150,90H210V150A60,60 0 1,1 150,90Z" />
+</vector>

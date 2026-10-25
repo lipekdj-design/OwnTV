@@ -84,29 +84,29 @@ data class StagePalette(
     companion object {
         val Dark = StagePalette(
             isLight = false,
-            text = Color(0xFFF1F5F3),
-            muted = Color(0xFFA7B3AE),
-            dim = Color(0xFF6D7A75),
-            itemText = Color(0xFFD5DFDB),
-            menuItemText = Color(0xFFDBE4E0),
-            tagText = Color(0xFFC8D3CE),
+            text = Color(0xFFF5F3F7),
+            muted = Color(0xFFB2ADBA),
+            dim = Color(0xFF78737F),
+            itemText = Color(0xFFDEDAE3),
+            menuItemText = Color(0xFFE3E0E8),
+            tagText = Color(0xFFD0CCD6),
             ink = Color.White,
-            page = Color(0xFF05080A),
-            glassTint = Color(0xFF121A1E),
-            glassOff = Color(0xFF121A1C),
+            page = Color(0xFF0E0E0E),
+            glassTint = Color(0xFF1B1920),
+            glassOff = Color(0xFF1A191D),
             ok = Color(0xFF7BE3A4),
             warn = Color(0xFFFFB86B),
             danger = Color(0xFFFF8A7A),
-            body = Color(0xFFC9D3CF),
-            navText = Color(0xFFC4CFCA),
+            body = Color(0xFFD3CFD8),
+            navText = Color(0xFFCDC9D2),
             fxText = Color.White,
-            fxLine = Color(0xFFD9E6E1),
-            scrim = Color(2, 5, 6).copy(alpha = 0.55f),
-            wash = Color(5, 8, 10),
+            fxLine = Color(0xFFE3DFE8),
+            scrim = Color(6, 5, 8).copy(alpha = 0.55f),
+            wash = Color(10, 9, 12),
             shadowTint = Color.Black,
             shadowScale = 1f,
             segmentOn = Color.White.copy(alpha = 0.13f),
-            knobOff = Color(0xFFCFD8D4),
+            knobOff = Color(0xFFD4D1D8),
             keycap = Color.White.copy(alpha = 0.08f),
             chipWarnText = Color(0xFFFFD27A),
             chipWarnFill = Color(255, 200, 80).copy(alpha = 0.14f),
@@ -238,7 +238,7 @@ val stageAccent: StageAccent
     }
 
 /**
- * Stage type: a design size and weight in the user's main font (Plus Jakarta Sans by default).
+ * Stage type: a design size and weight in the user's main font (DM Sans by default in DROPZ TV).
  * Line height is left to the font, as the design's `line-height: normal` leaves it to the browser.
  */
 @Composable

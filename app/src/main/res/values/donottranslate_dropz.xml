@@ -2,4 +2,6 @@
 <resources>
     <!-- DROPZ TV: this fork's name on the home screen and in the app list. -->
     <string name="app_name" translatable="false">DROPZ TV</string>
+    <!-- The default font slot now renders DM Sans (see FontCustomization.kt). -->
+    <string name="settings_font_plus_jakarta_sans" translatable="false">DM Sans</string>
 </resources>

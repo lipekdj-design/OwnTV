@@ -915,6 +915,8 @@
 1	file-path	app/src/main/java/tv/own/owntv/ui/components/BackgroundImageChooserDialog.kt	png
 1	log	app/src/main/java/tv/own/owntv/ui/components/BackgroundPicture.kt	BgImage
 1	log	app/src/main/java/tv/own/owntv/ui/components/BackgroundPicture.kt	background image load failed: ${it.result.throwable.message}
+1	technical	app/src/main/java/tv/own/owntv/ui/components/BrandLockup.kt	TV
+1	technical	app/src/main/java/tv/own/owntv/ui/components/BrandLockup.kt	dropz
 1	protocol	app/src/main/java/tv/own/owntv/ui/components/GenreColor.kt	+18
 1	protocol	app/src/main/java/tv/own/owntv/ui/components/GenreColor.kt	18+
 1	protocol	app/src/main/java/tv/own/owntv/ui/components/GenreColor.kt	Action

@@ -102,6 +102,26 @@ private fun rolesFrom(seed: Color, isDark: Boolean): AccentRoles {
 }
 
 /**
+ * DROPZ identity: light purple #B88AF0 on dark surfaces, DROPZ purple #7B2FBE on light ones, with
+ * the purple as the container (white text) and lilac #F1E9FA as the light container.
+ */
+private fun dropzRoles(isDark: Boolean): AccentRoles = if (isDark) {
+    AccentRoles(
+        primary = Color(0xFFB88AF0),
+        onPrimary = Color(0xFF1C0B33),
+        primaryContainer = Color(0xFF7B2FBE),
+        onPrimaryContainer = Color(0xFFFFFFFF),
+    )
+} else {
+    AccentRoles(
+        primary = Color(0xFF7B2FBE),
+        onPrimary = Color(0xFFFFFFFF),
+        primaryContainer = Color(0xFFF1E9FA),
+        onPrimaryContainer = Color(0xFF2E0F4D),
+    )
+}
+
+/**
  * Build the resolved M3 tokens for a theme (dark/light) and accent. A valid [customAccent] hex
  * overrides the preset (its tonal roles are generated from the seed color).
  *
@@ -114,20 +134,11 @@ fun ownTvColors(
     customAccent: String = "",
     focusHighlight: String = "",
 ): OwnTVColors {
-    val roles = parseAccentHex(customAccent)?.let { rolesFrom(it, isDark) } ?: AccentRoles(
-        primary = accent.primary(isDark),
-        onPrimary = accent.onPrimary(isDark),
-        primaryContainer = accent.primaryContainer(isDark),
-        onPrimaryContainer = accent.onPrimaryContainer(isDark),
-    )
+    // DROPZ TV: the DROPZ purple is the accent unless the user typed their own hex.
+    val roles = parseAccentHex(customAccent)?.let { rolesFrom(it, isDark) } ?: dropzRoles(isDark)
     val primary = roles.primary
     // Always the dark-surface tone of the same accent: the player HUD is dark chrome in every theme.
-    val onVideoRoles = parseAccentHex(customAccent)?.let { rolesFrom(it, true) } ?: AccentRoles(
-        primary = accent.primary(true),
-        onPrimary = accent.onPrimary(true),
-        primaryContainer = accent.primaryContainer(true),
-        onPrimaryContainer = accent.onPrimaryContainer(true),
-    )
+    val onVideoRoles = parseAccentHex(customAccent)?.let { rolesFrom(it, true) } ?: dropzRoles(true)
     val focus = parseAccentHex(focusHighlight) ?: primary
     return if (isDark) {
         OwnTVColors(
