@@ -298,6 +298,23 @@ jobs:
           path: dist/*
           if-no-files-found: error
 
+      # DROPZ TV fork: every build on main also replaces the "dropz-tv-latest" pre-release, so the
+      # update routine on the home PC downloads a fixed public URL instead of a login-only artifact:
+      #   https://github.com/lipekdj-design/OwnTV/releases/download/dropz-tv-latest/DROPZ-TV.apk
+      # DROPZ-TV.txt carries the short commit, which the PC compares with the one it installed last.
+      - name: Publish the DROPZ TV rolling build
+        if: env.IS_TAG != 'true' && github.ref == 'refs/heads/main' && github.repository == 'lipekdj-design/OwnTV'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp "$ARM_SRC" dist/DROPZ-TV.apk
+          echo "${GITHUB_SHA::7}" > dist/DROPZ-TV.txt
+          gh release delete dropz-tv-latest --yes --cleanup-tag || true
+          gh release create dropz-tv-latest dist/DROPZ-TV.apk dist/DROPZ-TV.txt \
+            --prerelease --target "$GITHUB_SHA" \
+            --title "DROPZ TV ${GITHUB_SHA::7}" \
+            --notes "Build ${GITHUB_SHA::7} da branch main, instalada pela rotina de atualizacao da TV."
+
       - name: Extract release notes from CHANGELOG.md
         if: env.IS_TAG == 'true'
         env:
