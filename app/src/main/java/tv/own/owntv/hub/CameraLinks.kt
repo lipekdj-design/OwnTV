@@ -66,6 +66,12 @@ object CameraLinks : KoinComponent {
                 }
             }
             val source = get<SourceDao>().observeAll().first().firstOrNull { it.name == sourceName } ?: return@runCatching null
+            // A launcher link only opens channels of the active profile's playlists: make sure the
+            // cameras are one of them (a no-op when already linked).
+            val profileId = get<SettingsRepository>().activeProfileIdNow()
+            if (profileId >= 0) {
+                get<SourceDao>().link(tv.own.owntv.core.database.entity.ProfileSourceCrossRef(profileId = profileId, sourceId = source.id))
+            }
             val name = wanted.takeIf { it.isNotEmpty() && entries.containsKey(it) } ?: entries.keys.firstOrNull() ?: return@runCatching null
             LauncherDeepLink.Live(sourceId = source.id, name = name)
         }.onFailure { Log.w(TAG, "camera link failed", it) }.getOrNull()
@@ -74,9 +80,11 @@ object CameraLinks : KoinComponent {
     private suspend fun ensureSource(sourceName: String, file: File) {
         val existing = get<SourceDao>().observeAll().first().firstOrNull { it.name == sourceName }
         if (existing == null) {
-            val importer: SourceImporter = get()
+            // Without a profile the importer would create one of its own; wait for setup to finish.
             val profileId = get<SettingsRepository>().activeProfileIdNow()
-            if (profileId >= 0) importer.useProfile(profileId)
+            if (profileId < 0) return
+            val importer: SourceImporter = get()
+            importer.useProfile(profileId)
             importer.m3u(sourceName, file.absolutePath)
         } else {
             get<CatalogSyncScheduler>().enqueueSync(
