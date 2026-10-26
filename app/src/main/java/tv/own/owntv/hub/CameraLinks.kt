@@ -77,6 +77,20 @@ object CameraLinks : KoinComponent {
         }.onFailure { Log.w(TAG, "camera link failed", it) }.getOrNull()
     }
 
+    /**
+     * If the cameras playlist became the active playlist (the top-bar picker, or Settings), go back to
+     * "All playlists": with only the cameras active, Movies and Series are empty.
+     */
+    suspend fun releaseActivePlaylist(context: Context) = withContext(Dispatchers.IO) {
+        runCatching {
+            val sourceName = context.getString(R.string.dropz_cameras_source)
+            val cameras = get<SourceDao>().observeAll().first().firstOrNull { it.name == sourceName } ?: return@runCatching
+            val settings = get<SettingsRepository>()
+            if (settings.currentDefaultSourceId() == cameras.id) settings.setDefaultSource(-1L)
+        }.onFailure { Log.w(TAG, "release active playlist failed", it) }
+        Unit
+    }
+
     private suspend fun ensureSource(sourceName: String, file: File) {
         val existing = get<SourceDao>().observeAll().first().firstOrNull { it.name == sourceName }
         if (existing == null) {

@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
@@ -108,6 +109,7 @@ open class MainActivity : ComponentActivity() {
         if (!tv.own.owntv.hub.CameraLinks.isCameraLink(uri) || uri == null) return
         lifecycleScope.launch {
             tv.own.owntv.hub.CameraLinks.handle(applicationContext, uri)?.let { pendingDeepLink = it }
+            tv.own.owntv.hub.CameraLinks.releaseActivePlaylist(applicationContext)
         }
     }
 
@@ -200,6 +202,7 @@ open class MainActivity : ComponentActivity() {
         // postSplashScreenTheme (Theme.OwnTV), so the activity ends up in the same theme as before.
         val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
+        lifecycleScope.launch { tv.own.owntv.hub.CameraLinks.releaseActivePlaylist(applicationContext) }
         val splashDeadline = SystemClock.uptimeMillis() + SPLASH_TIMEOUT_MS
         splash.setKeepOnScreenCondition { !contentReady && SystemClock.uptimeMillis() < splashDeadline }
         pendingDeepLink = LauncherDeepLink.parse(intent.data)
@@ -272,7 +275,11 @@ open class MainActivity : ComponentActivity() {
             val avatarPath by viewModel.avatarPath.collectAsStateWithLifecycle()
             val profileName by viewModel.profileName.collectAsStateWithLifecycle()
             val sourceSummary by viewModel.sourceSummary.collectAsStateWithLifecycle()
-            val playlists by viewModel.playlists.collectAsStateWithLifecycle()
+            val allPlaylists by viewModel.playlists.collectAsStateWithLifecycle()
+            // DROPZ TV: the cameras playlist is opened from the Cameras item, never picked as the
+            // active playlist — picking it left Movies and Series empty until it was switched back.
+            val camerasName = stringResource(R.string.dropz_cameras_source)
+            val playlists = remember(allPlaylists, camerasName) { allPlaylists.filterNot { it.name == camerasName } }
             val activePlaylistId by viewModel.activePlaylistId.collectAsStateWithLifecycle()
             val weather by viewModel.weather.collectAsStateWithLifecycle()
             val weatherFahrenheit by viewModel.weatherFahrenheit.collectAsStateWithLifecycle()

@@ -884,6 +884,7 @@
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	name
 1	log	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	open camera failed
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	owntv
+1	log	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	release active playlist failed
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	setup
 1	uri	app/src/main/java/tv/own/owntv/hub/CameraLinks.kt	url
 1	log	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	HomeHub
