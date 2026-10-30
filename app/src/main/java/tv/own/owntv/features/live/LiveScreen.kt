@@ -724,9 +724,9 @@ fun LiveScreen(
                         placeholder = if (separate) stringResource(R.string.common_search) else stringResource(R.string.content_search_in, headerLabel),
                         // The design's share of the list width, but never more than the two tools leave:
                         // a narrow custom list shrinks the field, not "Guide view".
+                        // DROPZ TV: the sort and Guide-view tools are gone, so the search takes the whole row.
                         modifier = Modifier
-                            .weight(1f, fill = false)
-                            .width(if (separate) listWidth * (230f / 620f) else listWidth * (456f / 846f))
+                            .weight(1f)
                             .focusRequester(listSearchFocus)
                             .onFocusChanged { if (it.hasFocus && previewEnabled) vm.stopPreview() }
                             // ◀ Categories from the search field too, as from the rows (not while typing — a search that found nothing here may be in another category).
@@ -739,17 +739,6 @@ fun LiveScreen(
                                     true
                                 } else false
                             },
-                    )
-                    tv.own.owntv.ui.stage.StageTool(
-                        text = null,
-                        icon = OwnTVIcon.SORT,
-                        value = if (sortMode == tv.own.owntv.core.settings.SettingsRepository.SortMode.ALPHA) stringResource(R.string.settings_sort_alpha) else stringResource(R.string.content_epg_sort_provider),
-                        onClick = vm::toggleSort,
-                    )
-                    tv.own.owntv.ui.stage.StageTool(
-                        text = stringResource(R.string.content_live_guide_view),
-                        icon = OwnTVIcon.GRID,
-                        onClick = onOpenGuide,
                     )
                 }
                 Spacer(Modifier.height(20.mpx))

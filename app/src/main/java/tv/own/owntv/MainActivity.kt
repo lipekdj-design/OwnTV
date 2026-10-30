@@ -476,7 +476,8 @@ open class MainActivity : ComponentActivity() {
                                 onSetCustomAvatar = { file -> viewModel.setCustomAvatar(file) },
                                 onClearCustomAvatar = viewModel::clearCustomAvatar,
                                 profileName = profileName,
-                                sourceSummary = sourceSummary,
+                                // With the cameras hidden from the switcher, a single list shows its own name.
+                                sourceSummary = playlists.singleOrNull()?.name ?: sourceSummary,
                                 playlists = playlists,
                                 activePlaylistId = activePlaylistId,
                                 onSelectPlaylist = viewModel::setActivePlaylist,

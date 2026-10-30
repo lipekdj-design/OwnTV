@@ -29,7 +29,6 @@ import tv.own.owntv.features.shell.components.VodListRow
 import tv.own.owntv.features.shell.components.VodOptionsMenu
 import tv.own.owntv.features.shell.components.VodPosterArt
 import tv.own.owntv.features.shell.components.VodSortMenu
-import tv.own.owntv.features.shell.components.VodSortTool
 import tv.own.owntv.features.shell.components.VodStepper
 import tv.own.owntv.features.shell.components.VodTitleInfo
 import tv.own.owntv.features.shell.components.cinematicQualityBadges
@@ -300,7 +299,8 @@ private fun SeriesGrid(
     val cinematicDetailsPct by settingsVm.cinematicDetailsHeight(PanelSection.SERIES).collectAsStateWithLifecycle()
     // Cinematic is grid-only. The stored choice is deliberately not rewritten, so switching back to
     // Separate restores the user's List.
-    val viewMode = if (cinematic) SettingsRepository.VodViewMode.GRID else storedViewMode
+    // DROPZ TV: always the poster grid (the Grid/List switch is gone).
+    val viewMode = SettingsRepository.VodViewMode.GRID
     val chNavEnabled by settingsVm.chNavEnabled.collectAsStateWithLifecycle()
     val chNavUpSkip by settingsVm.chNavUpSkip.collectAsStateWithLifecycle()
     val chNavDownSkip by settingsVm.chNavDownSkip.collectAsStateWithLifecycle()
@@ -645,11 +645,10 @@ private fun SeriesGrid(
                         StageSearchField(
                             query = searchQuery, onQueryChange = vm::setSearchQuery,
                             placeholder = stringResource(R.string.content_search_in, headerLabel),
-                            modifier = Modifier.width(440.mpx).focusRequester(listSearchFocus).then(searchLeft),
+                            modifier = Modifier.width(760.mpx).focusRequester(listSearchFocus).then(searchLeft),
                             onEditingChange = { searchEditing = it },
                         )
-                        VodSortTool(sortMode, Modifier.focusRequester(sortFocus)) { sortOpen = true }
-                        StageTool(text = stringResource(R.string.content_category_browser_title), icon = OwnTVIcon.LIST, onClick = { categoriesOpen = true })
+                                                StageTool(text = stringResource(R.string.content_category_browser_title), icon = OwnTVIcon.LIST, onClick = { categoriesOpen = true })
                         Spacer(Modifier.weight(1f))
                         StageKeyHints(listOf(playHint, optionsHint, "◀" to stringResource(R.string.content_category_browser_title)))
                     }
@@ -758,13 +757,7 @@ private fun SeriesGrid(
                         modifier = Modifier.weight(1f).focusRequester(listSearchFocus).then(searchLeft),
                         onEditingChange = { searchEditing = it },
                     )
-                    StageTool(text = null, icon = OwnTVIcon.SORT, value = vodSortLabel(sortMode), trailingIcon = OwnTVIcon.CHEVRON_DOWN, onClick = { sortOpen = true }, modifier = Modifier.focusRequester(sortFocus))
-                    StageSegmented(
-                        options = listOf(stringResource(R.string.settings_view_grid), stringResource(R.string.settings_view_list)),
-                        selected = if (viewMode == SettingsRepository.VodViewMode.LIST) 1 else 0,
-                        icons = listOf(OwnTVIcon.GRID, OwnTVIcon.LIST),
-                        onSelect = { i -> if ((i == 1) != (viewMode == SettingsRepository.VodViewMode.LIST)) vm.toggleViewMode() },
-                    )
+                    // DROPZ TV: no sort menu or Grid/List switch here — always the grid, and the search gets the room.
                 }
                 // The lists clip what is drawn outside them, which cut the focused card's glow: they are
                 // laid out [glowRoom] wider at each side and padded back by the same amount.
