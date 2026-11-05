@@ -303,7 +303,8 @@ jobs:
       #   https://github.com/lipekdj-design/OwnTV/releases/download/dropz-tv-latest/DROPZ-TV.apk
       # DROPZ-TV.txt carries the short commit, which the PC compares with the one it installed last.
       - name: Publish the DROPZ TV rolling build
-        if: env.IS_TAG != 'true' && github.ref == 'refs/heads/main' && github.repository == 'lipekdj-design/OwnTV'
+        # Off unless the repository variable DROPZ_PUBLISH is "on" (the public download is paused).
+        if: env.IS_TAG != 'true' && github.ref == 'refs/heads/main' && github.repository == 'lipekdj-design/OwnTV' && vars.DROPZ_PUBLISH == 'on'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
