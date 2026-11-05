@@ -927,7 +927,7 @@
 1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	password
 1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	playlists
 1	log	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	poll failed
-1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	profile
+2	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	profile
 1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	remote_applied
 1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	remote_code
 1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	remote_device
