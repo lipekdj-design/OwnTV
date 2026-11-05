@@ -35,6 +35,19 @@
 1	app/src/main/java/tv/own/owntv/features/settings/VideoPlayerSettingsScreen.kt	#FFEB3B
 2	app/src/main/java/tv/own/owntv/features/settings/VideoPlayerSettingsScreen.kt	#FFFFFF
 1	app/src/main/java/tv/own/owntv/features/shell/components/MediaDetailsScreen.kt	\0
+2	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	\0
+2	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	dropztv_poll
+2	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	null
+4	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	p_device
+3	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	p_version
+1	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	sb_publishable_ZrhzG_pXI9mARfuta_TUKg_oK9Xpn6u
+1	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	sem config
+1	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	sem listas
+2	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	server
+1	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	start check failed
+1	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	type
+2	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	url
+2	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	username
 1	app/src/main/java/tv/own/owntv/ui/components/ColorPicker.kt	#%06X
 1	app/src/main/java/tv/own/owntv/ui/components/TextInputDialog.kt	\0
 1	app/src/main/java/tv/own/owntv/ui/components/TvImeMetrics.kt	$trigger visible=${next.visible} source=${next.source} displayH=$displayHeight

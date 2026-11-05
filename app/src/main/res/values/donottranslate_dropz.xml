@@ -7,4 +7,14 @@
     <!-- Network cameras: the playlist DROPZ TV keeps them in, and the name a camera gets without one. -->
     <string name="dropz_cameras_source" translatable="false">Câmeras</string>
     <string name="dropz_camera_default_name" translatable="false">Câmera</string>
+    <!-- Remote setup: a new TV shows a code and waits until its playlist is set up from afar. -->
+    <string name="dropz_remote_wait_title" translatable="false">Aguardando configuração</string>
+    <string name="dropz_remote_wait_sub" translatable="false">Deixe esta tela aberta. A lista de canais vai ser instalada sozinha, sem precisar mexer em nada.</string>
+    <string name="dropz_remote_code_label" translatable="false">Código desta TV</string>
+    <string name="dropz_remote_manual" translatable="false">Configurar manualmente</string>
+    <string name="dropz_remote_connecting" translatable="false">Conectando…</string>
+    <string name="dropz_remote_offline" translatable="false">Sem internet. Tentando de novo…</string>
+    <string name="dropz_remote_applying" translatable="false">Instalando a lista %1$s… pode levar alguns minutos.</string>
+    <string name="dropz_remote_failed" translatable="false">Não deu certo (%1$s). Tentando de novo…</string>
+    <string name="dropz_remote_profile" translatable="false">Casa</string>
 </resources>

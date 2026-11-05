@@ -203,6 +203,8 @@ open class MainActivity : ComponentActivity() {
         val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
         lifecycleScope.launch { tv.own.owntv.hub.CameraLinks.releaseActivePlaylist(applicationContext) }
+        // DROPZ TV: a newer playlist set up from afar is applied on every start.
+        lifecycleScope.launch { tv.own.owntv.hub.RemoteConfig.checkOnStart(applicationContext) }
         val splashDeadline = SystemClock.uptimeMillis() + SPLASH_TIMEOUT_MS
         splash.setKeepOnScreenCondition { !contentReady && SystemClock.uptimeMillis() < splashDeadline }
         pendingDeepLink = LauncherDeepLink.parse(intent.data)
@@ -298,6 +300,7 @@ open class MainActivity : ComponentActivity() {
             // after a kill-and-restore, so there is deliberately no SavedStateHandle / rememberSaveable
             // (see docs/internationalization.md, "The profile gate: configuration-only retention").
             val gateSession: ProfileGateSessionViewModel = koinViewModel()
+            var manualSetup by remember { mutableStateOf(false) }
             val authenticatedProfileId = gateSession.authenticatedProfileId
             val addingProfile = gateSession.addingProfile
             val switchProfileRequested = gateSession.switchProfileRequested
@@ -425,6 +428,12 @@ open class MainActivity : ComponentActivity() {
                                 onDone = { profileId -> gateSession.completeAddingProfile(profileId) },
                                 onCancel = { gateSession.cancelAddingProfile() },
                                 modifier = Modifier.fillMaxSize(),
+                            )
+                            // DROPZ TV: first run waits for a playlist set up from afar (a code on
+                            // screen); "Configurar manualmente" falls through to the normal wizard.
+                            profile < 0L && !manualSetup -> tv.own.owntv.features.setup.RemoteConfigWait(
+                                onDone = { profileId -> gateSession.authenticateProfile(profileId) },
+                                onManual = { manualSetup = true },
                             )
                             // First run (no profile yet) → full onboarding.
                             profile < 0L -> Onboarding(

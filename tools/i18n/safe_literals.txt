@@ -596,6 +596,7 @@
 1	technical	app/src/main/java/tv/own/owntv/features/setup/AddSourceScreen.kt	m3u8
 1	technical	app/src/main/java/tv/own/owntv/features/setup/AddSourceScreen.kt	▶
 1	technical	app/src/main/java/tv/own/owntv/features/setup/AddSourceScreen.kt	◀ ▶
+1	technical	app/src/main/java/tv/own/owntv/features/setup/RemoteConfigWait.kt	····
 2	empty	app/src/main/java/tv/own/owntv/features/setup/RemoteSetupScreen.kt	\0
 1	technical	app/src/main/java/tv/own/owntv/features/setup/RemoteSetupScreen.kt	…
 12	empty	app/src/main/java/tv/own/owntv/features/setup/SetupViewModel.kt	\0
@@ -897,6 +898,40 @@
 1	log	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	query ${uri.path} failed
 1	protocol	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	subtitle
 1	protocol	app/src/main/java/tv/own/owntv/hub/HomeHubProvider.kt	title
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	, falhas
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	:
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	://
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	Authorization
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	Bearer $KEY
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	HTTP ${r.code}
+1	log	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	RemoteConfig
+1	log	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	ack failed
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	adicionadas $added, ja existiam $skipped
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	apikey
+1	mime	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	application/json
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	code
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	config
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	config_version
+1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	dropz_tv
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	dropztv_ack
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	dropztv_register
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	erro:
+1	url	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	http://$u
+1	url	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	https://iwvzebbxvuskllmbvgsg.supabase.co/rest/v1/rpc/
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	m3u
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	name
+1	technical	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	ok:
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	p_config_version
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	p_model
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	p_status
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	password
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	playlists
+1	log	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	poll failed
+1	json	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	profile
+1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	remote_applied
+1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	remote_code
+1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	remote_device
+1	preference-key	app/src/main/java/tv/own/owntv/hub/RemoteConfig.kt	remote_pending_profile
 2	empty	app/src/main/java/tv/own/owntv/player/AudioNowPlayingBar.kt	\0
 1	technical	app/src/main/java/tv/own/owntv/player/AudioNowPlayingBar.kt	eq
 1	technical	app/src/main/java/tv/own/owntv/player/AudioNowPlayingBar.kt	eqBar$i
