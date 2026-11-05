@@ -180,6 +180,12 @@ object RemoteConfig : KoinComponent {
             }
         }
         importer.useProfile(profileId)
+        // The profile name can be changed from afar too (the remote sets it when the TV is in use).
+        val wantedName = config.optString("profile").trim()
+        if (!newProfile && wantedName.isNotEmpty()) {
+            val dao = get<ProfileDao>()
+            dao.getById(profileId)?.takeIf { it.name != wantedName }?.let { dao.update(it.copy(name = wantedName)) }
+        }
 
         val existing = sources.getAllOnce()
         var added = 0
